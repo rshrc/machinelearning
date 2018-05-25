@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 # Importing the dataset
 dataset = pd.read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
+dataset = pd.read_csv()
 
 import re
 # import nltk, we use it elsewhere
@@ -30,12 +31,7 @@ y = dataset.iloc[:,1].values
 
 # splitting the test data and the training data
 from sklearn.cross_validation import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
-
-from sklearn.preprocessing import StandardScaler
-sc_X = StandardScaler()
-X_train = sc_X.fit_transform(X_train)
-X_test = sc_X.fit_transform(X_test)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 0)
 
 # Fitting the classifier to the training set
 from sklearn.naive_bayes import GaussianNB
