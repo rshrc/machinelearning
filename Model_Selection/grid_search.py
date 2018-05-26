@@ -38,15 +38,16 @@ accuracies = cross_val_score(estimator = classifier, X = X_train, y = y_train, c
 accuracies.mean()
 accuracies.std()
 
-# Applying Grid Search to find the best model and the best parameters
+# Applying the Grid Search 
+# Taking in consideration the hyper-parameters
 from sklearn.model_selection import GridSearchCV
-parameters = [{'C': [1, 10, 100, 1000], 'kernel': ['linear']},
-              {'C': [1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]}]
+parameters = [{'C' : [1, 10, 100, 1000], 'kernel' : ['linear']},
+              {'C' : [1, 10, 100, 1000], 'kernel' : ['rbf'], 'gamma' : [0.5, 0.1, 0.01, 0.001, 0.0001]}]
 grid_search = GridSearchCV(estimator = classifier,
                            param_grid = parameters,
                            scoring = 'accuracy',
                            cv = 10,
-                           n_jobs = -1)
+                           n_jobs = -1) # -1 for all the CPU's
 grid_search = grid_search.fit(X_train, y_train)
 best_accuracy = grid_search.best_score_
 best_parameters = grid_search.best_params_
